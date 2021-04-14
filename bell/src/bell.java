@@ -6,29 +6,25 @@ import java.util.*;
 public class bell {
 
     public static void main(String[] args) throws IOException {
-        ArrayList<Integer> arr = new ArrayList<Integer>(){
-            {
-                add(2);
-                add(5);
-                add(3);
-                add(6);
-                add(9);
-                add(1);
-                add(8);
-                add(11);
-                add(12);
-                add(13);
-                add(14);
-                add(15);
-            }
-        };
+        // get data and input in array
+        FileReader file = new FileReader("input.txt");
+        Scanner sc = new Scanner(file);
+        String[] dataStr = sc.nextLine().split(" ");
+
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        for(int i = 0; i < dataStr.length; i++) arr.add(Integer.parseInt(dataStr[i]));
 
         arr.sort(new NumComparator());
         int arrSize = arr.size();
         ArrayList<Integer> arrRes = new ArrayList<Integer>();
         while(arrRes.size() < arrSize) arrRes = exchange_numbers(arr, arrRes);
 
-        for(int i=0; i < arrRes.size(); i++) System.out.println(arrRes.get(i));
+//        for(int i=0; i < arrRes.size(); i++) System.out.println(arrRes.get(i));
+
+        // output
+        FileWriter out = new FileWriter("output.txt");
+        for(int i = 0; i < arrRes.size(); i++) out.write(arrRes.get(i).toString() + ' ');
+        out.close();
     }
 
     static class NumComparator implements Comparator<Integer>{
