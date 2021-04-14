@@ -14,7 +14,7 @@ public class bell {
         ArrayList<Integer> arr = new ArrayList<Integer>();
         for(int i = 0; i < dataStr.length; i++) arr.add(Integer.parseInt(dataStr[i]));
 
-        arr.sort(new NumComparator());
+        arr.sort(Integer::compare);
         int arrSize = arr.size();
         ArrayList<Integer> arrRes = new ArrayList<Integer>();
         while(arrRes.size() < arrSize) arrRes = exchange_numbers(arr, arrRes);
@@ -25,12 +25,6 @@ public class bell {
         FileWriter out = new FileWriter("output.txt");
         for(int i = 0; i < arrRes.size(); i++) out.write(arrRes.get(i).toString() + ' ');
         out.close();
-    }
-
-    static class NumComparator implements Comparator<Integer>{
-        public int compare(Integer first, Integer second){
-            return first - second;
-        }
     }
 
     static ArrayList<Integer> exchange_numbers(ArrayList<Integer> arrSrc, ArrayList<Integer> arrDest){
